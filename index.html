@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>CozyHome</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+</head>
+<body>
+    <!-- Auth Screen -->
+    <div id="auth-screen" class="screen">
+        <div class="auth-container">
+            <div class="auth-logo">
+                <div class="auth-icon">🏠</div>
+                <h1>CozyHome</h1>
+                <p id="auth-subtitle">Welcome back</p>
+            </div>
+            <form id="auth-form" class="auth-form">
+                <div id="signup-fields" class="hidden">
+                    <input type="text" id="auth-username" placeholder="Username" autocomplete="username">
+                    <input type="text" id="auth-name" placeholder="Name" autocomplete="name">
+                </div>
+                <input type="email" id="auth-email" placeholder="Email" autocomplete="email" required>
+                <input type="password" id="auth-password" placeholder="Password" autocomplete="current-password" required>
+                <div id="confirm-field" class="hidden">
+                    <input type="password" id="auth-confirm" placeholder="Confirm Password">
+                </div>
+                <p id="auth-error" class="auth-error hidden"></p>
+                <button type="submit" id="auth-submit" class="btn-primary">Sign In</button>
+            </form>
+            <button id="auth-toggle" class="btn-text">New here? Create an account</button>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app-screen" class="screen hidden">
+        <!-- Header -->
+        <header id="app-header">
+            <div class="header-content">
+                <button id="add-menu-btn" class="header-btn" title="Add">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+                <h1 class="header-title">CozyHome</h1>
+                <button id="profile-btn" class="header-btn" title="Profile">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Filter Tabs -->
+        <div class="filter-bar">
+            <button class="filter-tab active" data-filter="all">All</button>
+            <button class="filter-tab" data-filter="room">Room</button>
+            <button class="filter-tab" data-filter="type">Type</button>
+            <button class="filter-tab" data-filter="projects">Projects</button>
+            <button class="filter-tab" data-filter="info">Info</button>
+        </div>
+
+        <!-- Main Content -->
+        <main id="main-content">
+            <div id="empty-state" class="empty-state hidden">
+                <div class="empty-icon">🏠</div>
+                <h3>No Items Yet</h3>
+                <p>Tap + to create a room, add an item, or start a project.</p>
+            </div>
+            <div id="list-container"></div>
+        </main>
+
+        <!-- Pattern Overlay (canvas) -->
+        <canvas id="pattern-canvas"></canvas>
+    </div>
+
+    <!-- Add Menu Dropdown -->
+    <div id="add-menu" class="dropdown-menu hidden">
+        <button data-action="add-room">
+            <span class="menu-icon">🏠</span> Create Room
+        </button>
+        <div id="subroom-menu-container"></div>
+        <button data-action="add-item">
+            <span class="menu-icon">➕</span> Add Item
+        </button>
+        <div class="menu-divider"></div>
+        <button data-action="add-project">
+            <span class="menu-icon">📁</span> Create Project
+        </button>
+    </div>
+
+    <!-- Overlay for closing menus -->
+    <div id="overlay" class="overlay hidden"></div>
+
+    <!-- Modals will be injected here -->
+    <div id="modal-container"></div>
+
+    <script src="js/store.js"></script>
+    <script src="js/themes.js"></script>
+    <script src="js/patterns.js"></script>
+    <script src="js/modals.js"></script>
+    <script src="js/views.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
