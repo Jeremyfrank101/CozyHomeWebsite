@@ -10,14 +10,44 @@ const App = {
         this.checkAuth();
     },
 
+    _heartInterval: null,
+
     checkAuth() {
         const user = Store.getUser();
         document.getElementById('auth-screen').classList.toggle('hidden', !!user);
         document.getElementById('app-screen').classList.toggle('hidden', !user);
         if (user) {
+            this._stopHearts();
             PatternEngine.init();
             this.render();
+        } else {
+            this._startHearts();
         }
+    },
+
+    _startHearts() {
+        if (this._heartInterval) return;
+        const screen = document.getElementById('auth-screen');
+        const hearts = ['❤️', '🧡', '💛', '💚', '💙', '💜', '🩷', '🩵', '🤍', '🤎'];
+        this._heartInterval = setInterval(() => {
+            const el = document.createElement('span');
+            el.className = 'bubble-heart';
+            el.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+            el.style.left = Math.random() * 100 + '%';
+            el.style.fontSize = (12 + Math.random() * 14) + 'px';
+            el.style.animationDuration = (4 + Math.random() * 4) + 's';
+            el.style.animationDelay = '0s';
+            screen.appendChild(el);
+            el.addEventListener('animationend', () => el.remove());
+        }, 400);
+    },
+
+    _stopHearts() {
+        if (this._heartInterval) {
+            clearInterval(this._heartInterval);
+            this._heartInterval = null;
+        }
+        document.querySelectorAll('.bubble-heart').forEach(el => el.remove());
     },
 
     bindEvents() {
